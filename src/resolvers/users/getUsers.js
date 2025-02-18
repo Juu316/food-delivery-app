@@ -1,3 +1,4 @@
+import fs from 'fs';
 export const users = [
   {
     firstname: "Usukh-Erdene",
@@ -26,5 +27,7 @@ export const users = [
 ];
 
 export const getUsers = (req, res) => {
-  res.json(users);
+  const users = fs.readFileSync('src/db/users.json');
+  res.send(JSON.parse(users))
+ 
 };
