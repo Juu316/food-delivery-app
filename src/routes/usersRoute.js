@@ -3,10 +3,10 @@ import { getUsers } from "../resolvers/users/getUsers.js";
 import { deleteUsers } from "../resolvers/users/deleteUsers.js";
 import { putUsers } from "../resolvers/users/PutUsers.js";
 import { createUsers } from "../resolvers/users/CreateUsers.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 export const router = express.Router();
-router.get("/", getUsers);
-router.delete('/', deleteUsers);
-router.put('/', putUsers);
-router.post('/', createUsers);
+router.get("/", authMiddleware, getUsers);
+router.delete("/", deleteUsers);
+router.put("/", putUsers);
+router.post("/", createUsers);
 export default router;
-
