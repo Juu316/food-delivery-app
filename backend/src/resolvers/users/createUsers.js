@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import { UserModel } from "../../models/user.scheme.js";
 
 // export const createUsers = (req, res) => {
 //   const {firstname, lastname, username, password, gender, age} = req.body;
@@ -23,32 +24,46 @@ import fs from "fs";
 // };
 
 export const createUsers = (req, res) => {
-  const { firstname, lastname, username, password, gender, age } = req.body;
+//   const { firstname, lastname, username, password, gender, age } = req.body;
 
-  // Check if all required fields are provided
-  if (!firstname || !lastname || !username || !password || !gender || !age) {
-    return res
-      .status(400)
-      .send({ status: "error", message: "All fields are required" });
-  }
+//   // Check if all required fields are provided
+//   if (!firstname || !lastname || !username || !password || !gender || !age) {
+//     return res
+//       .status(400)
+//       .send({ status: "error", message: "All fields are required" });
+//   }
 
-  // Read existing users
-  const users = readUsersFromFile();
+//   // Read existing users
+//   const users = readUsersFromFile();
 
-  // Check for duplicate username
-  const existingUser = users.find((user) => user.username === username);
-  if (existingUser) {
-    return res
-      .status(409)
-      .send({ status: "error", message: "Username already exists" });
-  }
+//   // Check for duplicate username
+//   const existingUser = users.find((user) => user.username === username);
+//   if (existingUser) {
+//     return res
+//       .status(409)
+//       .send({ status: "error", message: "Username already exists" });
+//   }
 
-  // Add the new user
-  const newUser = { firstname, lastname, username, password, gender, age };
-  users.push(newUser);
+//   // Add the new user
+//   const newUser = { firstname, lastname, username, password, gender, age };
+//   users.push(newUser);
 
-  // Write the updated users back to the file
-  writeUsersToFile(users);
+//   // Write the updated users back to the file
+//   writeUsersToFile(users);
 
-  res.status(201).send({ status: "success", data: newUser });
-};
+//   res.status(201).send({ status: "success", data: newUser });
+ };
+
+
+export const createUser = async(req, res )=>{
+  const{ email, name} = req.body
+  const updatedName = name + "0"
+  const newUser = await UserModel.create({name:updatedName, email})
+  res.send(newUser)
+}
+
+
+// const object = {name: "bat", age: 10
+// }
+// const {name} = object
+// console.log(object.name)
