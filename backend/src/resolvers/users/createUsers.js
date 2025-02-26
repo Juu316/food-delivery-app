@@ -2,6 +2,57 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import { UserModel } from "../../models/user.scheme.js";
+export const createUser = async(req, res )=>{
+  const{ email, name, _id , password, phoneNumber, address, role} = req.body
+  const updatedName = name + "0"
+  const newUser = await UserModel.create({name:updatedName, email, role})
+  res.send(newUser)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export const createUsers = (req, res) => {
 //   const {firstname, lastname, username, password, gender, age} = req.body;
@@ -23,7 +74,7 @@ import { UserModel } from "../../models/user.scheme.js";
 //   res.status(201).send({ status: "success", data: users });
 // };
 
-export const createUsers = (req, res) => {
+//export const createUsers = (req, res) => {
 //   const { firstname, lastname, username, password, gender, age } = req.body;
 
 //   // Check if all required fields are provided
@@ -52,15 +103,10 @@ export const createUsers = (req, res) => {
 //   writeUsersToFile(users);
 
 //   res.status(201).send({ status: "success", data: newUser });
- };
+ //};
 
 
-export const createUser = async(req, res )=>{
-  const{ email, name} = req.body
-  const updatedName = name + "0"
-  const newUser = await UserModel.create({name:updatedName, email})
-  res.send(newUser)
-}
+
 
 
 // const object = {name: "bat", age: 10
