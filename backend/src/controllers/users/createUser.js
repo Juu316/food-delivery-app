@@ -1,43 +1,21 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
-import { UserModel } from "../../models/user.scheme.js";
-export const createUser = async(req, res )=>{
-  const{ email, name, _id , password, phoneNumber, address, role} = req.body
-  const updatedName = name + "0"
-  const newUser = await UserModel.create({name:updatedName, email, role})
-  res.send(newUser)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { UserModel } from "../../models/user.schema.js";
+export const createUser = async (req, res) => {
+  const { email, name, _id, password, phoneNumber, address, role } = req.body;
+  // "Example of function use" =====> const updatedName = name + "0"
+  const newUser = await UserModel.create({
+    /*"Example of function use" =====>  name:updatedName,*/ email,
+    name,
+    _id,
+    password,
+    phoneNumber,
+    address,
+    role,
+  });
+  res.send(newUser);
+};
 
 
 
@@ -103,11 +81,7 @@ export const createUser = async(req, res )=>{
 //   writeUsersToFile(users);
 
 //   res.status(201).send({ status: "success", data: newUser });
- //};
-
-
-
-
+//};
 
 // const object = {name: "bat", age: 10
 // }
