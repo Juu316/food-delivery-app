@@ -1,8 +1,8 @@
 import express from "express";
-import { getUsers } from "../resolvers/users/getUsers.js";
-import { deleteUsers } from "../resolvers/users/deleteUsers.js";
-import { putUsers } from "../resolvers/users/PutUsers.js";
-import { createUser} from "../resolvers/users/createUser.js";
+import { getUsers } from "../controllers/users/getUsers.js";
+import { deleteUsers } from "../controllers/users/deleteUsers.js";
+import { putUsers } from "../controllers/users/PutUsers.js";
+import { createUser} from "../controllers/users/createUser.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 export const router = express.Router();
 router.get("/", authMiddleware, getUsers);

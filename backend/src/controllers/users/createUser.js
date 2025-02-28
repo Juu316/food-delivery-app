@@ -2,9 +2,13 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import { UserModel } from "../../models/user.schema.js";
+import bcrypt from "bcrypt";
 export const createUser = async (req, res) => {
   const { email, name, _id, password, phoneNumber, address, role } = req.body;
   // "Example of function use" =====> const updatedName = name + "0"
+  try{
+    
+  }catch(err){}
   const newUser = await UserModel.create({
     /*"Example of function use" =====>  name:updatedName,*/ email,
     name,
