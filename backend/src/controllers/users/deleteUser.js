@@ -1,5 +1,5 @@
 import express from 'express';
-export const deleteUsers = (req,res)=>{
+export const deleteUser = (req,res)=>{
     if (users.length > 0) {
         users.pop();
         res.send({ status: "success", data: users });

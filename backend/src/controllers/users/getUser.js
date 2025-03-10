@@ -29,7 +29,7 @@ const readUsersFromFile = () => {
   return JSON.parse(rawUserData);
 };
 
-export const getUsers = (req, res) => {
+export const getUser = (req, res) => {
   // Read existing users
   const users = readUsersFromFile();
 
