@@ -15,13 +15,9 @@
 //     return res.status(401).json({ message: "Invalid token" });
 //   }
 // };
-
-
-
-
 export const authMiddleware = (req, res, next) => {
     const { authorization } = req.headers;
-    if (!authorization) return res.json({ message: "unauthorized!!!" })
+    if (!authorization) return res.json({ message: "unauthorized!!" })
 
     const token = authorization.split(' ')[1]
 
