@@ -1,31 +1,32 @@
-import express from "express";
-import path from "path";
-import fs from "fs";
 import { UserModel } from "../../models/user.schema.js";
 import bcrypt from "bcrypt";
 export const createUser = async (req, res) => {
-  const { email, name, _id, password, phoneNumber, address, role } = req.body;
-  // "Example of function use" =====> const updatedName = name + "0"
-  try{
+  try {
     
-  }catch(err){}
-  const newUser = await UserModel.create({
-    /*"Example of function use" =====>  name:updatedName,*/ email,
-    name,
-    _id,
-    password,
-    phoneNumber,
-    address,
-    role,
-  });
+    const { email, name, _id, password, phoneNumber, address, role } = req.body;
+    const salt = await bcrypt.genSalt(10);
+
+    const hashedPassword = await bcrypt.hash(password, salt);
+    console.log("hashed password", hashedPassword);
+    const newUser = await UserModel.create({
+      /*"Example of function use" =====>  name:updatedName,*/ email,
+      name,
+      _id,
+      password:hashedPassword,
+      phoneNumber,
+      address,
+      role,
+    })
+
+    res.status(201).json(newUser);
+    // "Example of function use" =====> const updatedName = name + "0"
+  } catch (error) {console.error(error);
+    res
+      .status(500)
+      .json({ message: "Error creating user", error: error.message });}
+  ;
   res.send(newUser);
 };
-
-
-
-
-
-
 
 
 
