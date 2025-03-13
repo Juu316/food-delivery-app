@@ -6,7 +6,7 @@ import { createUser} from "../controllers/users/createUser.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 export const router = express.Router();
 router.get("/:id", authMiddleware, getUser);
-router.delete("/delete/:id", authMiddleware, deleteUser);
+router.delete("/:id", authMiddleware, deleteUser);
 router.put("/", putUser);
 router.post("/", createUser);
 export default router;
