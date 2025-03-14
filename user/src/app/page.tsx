@@ -1,4 +1,5 @@
 import Image from "next/image";
+;
 export default function Home() {
   return (
     <>
@@ -13,7 +14,7 @@ export default function Home() {
             height={500}
             layout="responsive"
             sizes="(max-width:768px) 50vw"
-          />
+            />
         </div>
       </div>
     </>
