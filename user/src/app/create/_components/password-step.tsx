@@ -9,57 +9,80 @@ type EmailStepProps = {
 export const PasswordStep = ({ setStep }: EmailStepProps) => {
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [error, setError] = useState("");
+  const [validatingError, setValidatingError] = useState(
+    "Password must contain at least one number and one symbol."
+  );
+  const [matchingError, setMatchingError] = useState("Passwords do not match.");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isPasswordMatching, setIsPasswordMatching] = useState(false);
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const validatePassword = (password) => {
+  const validatePassword = (password: string): boolean => {
     // Regex to check for at least one number and one symbol
-    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
+    const regex: RegExp = /^(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
     if (!regex.test(password)) {
-      setError("Password must contain at least one number and one symbol.");
+      setValidatingError(
+        "Password must contain at least one number and one symbol."
+      );
 
       return false;
     }
-    setError("");
+    setValidatingError("");
     return true;
   };
 
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
+  const handlePasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const value = (e.target as HTMLInputElement).value;
     setPassword(value);
     if (value) {
       validatePassword(value);
     } else {
-      setError("");
+      setValidatingError("");
     }
+    if (value !== confirmPassword) {
+      setMatchingError("Passwords do not match.");
+    }else{setMatchingError("")}
   };
 
-  const handleConfirmPasswordChange = (e) => {
+  const handleConfirmPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
     setConfirmPassword(value);
-    if (password && value !== password) {
-      setError("Passwords do not match.");
+    if (value !== password) {
+      setMatchingError("Passwords do not match.");
     } else {
-      setError("");
+      setMatchingError("");
     }
   };
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      document.getElementById("submitButton").click();
+      document.getElementById("submitButton")?.click();
     }
   };
   const handleSubmit = () => {
     setStep("login");
   };
+  const handleTopLeftButton=()=>{
+    setStep("email")
+}
+
+  useEffect(() => {
+    if (validatingError !== "" || matchingError !== "") {
+      setIsPasswordValid(false);
+    }
+    if (validatingError === "" && matchingError === "") {
+      setIsPasswordValid(true);
+    }
+  }, [validatingError, matchingError]);
   return (
     <>
       <div className="w-[25vw] flex flex-col gap-6">
-        <Button variant="outline" size="icon">
+        <Button onClick={handleTopLeftButton} variant="outline" size="icon">
           <ChevronRight />
         </Button>
         <div className="login-top">
@@ -89,7 +112,8 @@ export const PasswordStep = ({ setStep }: EmailStepProps) => {
           onChange={handleConfirmPasswordChange}
           onKeyDown={handleKeyDown}
         />
-        {error && <p className="login-warning">{error}</p>}
+        {validatingError && <p className="login-warning">{validatingError}</p>}
+        {matchingError && <p className="login-warning">{matchingError}</p>}
         <div>
           <input onChange={togglePasswordVisibility} type="checkbox" /> Show
           password

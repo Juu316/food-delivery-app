@@ -19,13 +19,13 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
   useEffect(() => {
     validateEmail();
   }, [email]);
-  // const getMessage = async () => {
-  //   const res = await axios.get("http://localhost:3005");
-  //   setMessage(res.data);
-  // };
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      document.getElementById('submitButton').click();
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const submitButton = document.getElementById(
+        "submitButton"
+      ) as HTMLButtonElement;
+      submitButton.click();
     }
   };
   const validateEmail = () => {
@@ -43,10 +43,15 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
   const handleSubmit = () => {
     setStep("password");
   };
-
+  const handleClickBlue = () => {
+    setStep("login");
+  };
+  const handleTopLeftButton=()=>{
+    setStep("login")
+}
   return (
     <div className="w-[25vw] flex flex-col gap-6">
-      <Button variant="outline" size="icon">
+      <Button onClick={handleTopLeftButton} variant="outline" size="icon">
         <ChevronRight />
       </Button>
       <div className="login-top">
@@ -57,6 +62,7 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
         </span>
       </div>
       <input
+        type="email"
         className="rounded-md w-full border h-[2.25rem] pl-3"
         placeholder="Enter your email address"
         onKeyDown={handleKeyDown}
@@ -81,7 +87,9 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
       </div>
       <div className="inline-block">
         Already have an account?{" "}
-        <span className="text-[#2563EB] cursor-pointer inline-block p-2">
+        <span
+          onClick={handleClickBlue}
+          className="text-[#2563EB] cursor-pointer inline-block p-2">
           Log in
         </span>
       </div>

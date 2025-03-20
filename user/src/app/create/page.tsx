@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { EmailStep } from "./_components/email-step";
 import { PasswordStep } from "./_components/password-step";
+import {LoginStep} from "./_components/login-step";
 import Image from "next/image";
 
 export default function Create() {
@@ -14,7 +15,7 @@ export default function Create() {
         <div className="w-[49vw] flex justify-center mt-[20vh]">
           {step === "email" && <EmailStep setStep={setStep} />}
           {step === "password" && <PasswordStep setStep={setStep}/>}
-          
+          {step === "login" && <LoginStep setStep={setStep}/>}
         </div>
       </div>
 
