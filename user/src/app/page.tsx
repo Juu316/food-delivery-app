@@ -1,7 +1,7 @@
 "use client";
 
-import Header from "./header/page";
-import Footer from "./footer/page";
+import Header from "./home/header/page";
+import Footer from "./home/footer/page";
 import Image from "next/image";
 export default function Home() {
   return (
@@ -19,4 +19,4 @@ export default function Home() {
     </>
   );
 }
-//15.6875rem BUTTON
+

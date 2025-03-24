@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+pre {
+  font-family: 'Inter', sans-serif;
+}
+
 .login-top{font-size: 24px;
 font-weight: 600;
 line-height: 32px;
@@ -47,4 +53,34 @@ line-height: 32px;
 
 }
 
+}
+
+
+.ticker-container {
+  overflow: hidden;
+  white-space: nowrap;
+  /* background-color: #000; Black background like news channels */
+  color: #fff; /* White text */
+  padding: 10px 0;
+  
+  position: relative;
+}
+
+.ticker-content {
+  display: inline-block;
+  animation: ticker-scroll 140s linear infinite;
+}
+
+.ticker-item {
+  display: inline-block;
+  margin-right: 50px; /* Space between items */
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
