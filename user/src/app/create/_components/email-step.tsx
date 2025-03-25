@@ -1,5 +1,5 @@
 import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
-//import axios from "axios";
+import axios from "axios";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -40,8 +40,14 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
     setIsEmailValid(Object.keys(errors).length === 0);
   };
 
-  const handleSubmit = () => {
-    setStep("password");
+  const handleSubmit = async () => {
+    try{
+      const response = await axios.post("http://localhost:3000", {email});
+      console.log(response.data)
+      setStep("password");
+
+    }catch(error){console.log("Error saving email:", error)}
+    
   };
   const handleClickBlue = () => {
     setStep("login");
