@@ -12,9 +12,11 @@ export const createUser = async (req, res) => {
       name,
       password: hashedPassword,
       phoneNumber,
+      address,
+      role
     });
 
-    res.status(201).json({ newUser });
+    res.status(201).json({message: "User created successfully", user: newUser});
   } catch (error) {
     console.error(error);
     res
