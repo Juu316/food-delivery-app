@@ -8,12 +8,14 @@ type EmailStepProps = {
 
 export const LoginStep = ({ setStep }: EmailStepProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-const handleClickBlue = ()=>{
-    setStep("email")
-}
-const handleTopLeftButton=()=>{
-    setStep("email")
-}
+  const [errors, setErrors] = useState<ErrorType>({} as ErrorType);
+  
+  const handleClickBlue = () => {
+    setStep("email");
+  };
+  const handleTopLeftButton = () => {
+    setStep("email");
+  };
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -39,6 +41,7 @@ const handleTopLeftButton=()=>{
           className="rounded-md w-full border h-[2.25rem] pl-3"
           placeholder="Enter your email address"
         />
+        {errors.email && <p className="login-warning">{errors.email}</p>}
         <input
           className="rounded-md w-full border h-[2.25rem] pl-3"
           placeholder="Password"
@@ -53,20 +56,20 @@ const handleTopLeftButton=()=>{
         <div>
           <button
             id="submitButton"
-            
-            
             className="w-full  bg-[#18181B] text-[#fafafa] rounded-md h-[2.25rem]"
             // style={{
             //   opacity: isPasswordValid ? 1 : 0.2,
             //   cursor: isPasswordValid ? "pointer" : "not-allowed",
             // }}
-            >
+          >
             Let&apos;s go
           </button>
         </div>
-        <div className="inline-block">
-          Don&apos;t have an account?{" "}
-          <span onClick={handleClickBlue} className="text-[#2563EB] cursor-pointer inline-block p-2">
+        <div className="inline-block text-muted-foreground">
+          Don&apos;t have an account?
+          <span
+            onClick={handleClickBlue}
+            className="text-[#2563EB] cursor-pointer inline-block p-2">
             Sign up
           </span>
         </div>

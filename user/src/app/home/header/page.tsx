@@ -12,7 +12,7 @@ export default function Header() {
           <div className="text-[white] text-xs">
             <div className="font-semibold text-xl tracking-[-2.5%]">
               Nom<span className="text-red-500">Nom</span>
-            </div>{" "}
+            </div>
             Swift delivery
           </div>
         </div>

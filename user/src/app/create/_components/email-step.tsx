@@ -69,13 +69,13 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
       </div>
       <input
         type="email"
-        className="rounded-md w-full border h-[2.25rem] pl-3"
+        className={`rounded-md w-full border h-[2.25rem] pl-3 ${errors.email ? "border-[#ef4444] border-opacity-50" : "border-gray-300"}`}
         placeholder="Enter your email address"
         onKeyDown={handleKeyDown}
         onChange={(e) => {
           setEmail(e.target.value);
         }}
-        style={{ borderColor: errors ? "#e4e4e7" : "#ef4444" }}></input>
+        />
       {errors.email && <p className="login-warning">{errors.email}</p>}
       <div>
         <button

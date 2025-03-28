@@ -1,6 +1,7 @@
 import { useState, useEffect, SetStateAction, Dispatch } from "react";
 import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type EmailStepProps = {
   setStep: Dispatch<SetStateAction<string>>;
@@ -26,7 +27,6 @@ export const PasswordStep = ({ setStep }: EmailStepProps) => {
       setValidatingError(
         "Password must contain at least one number and one symbol."
       );
-
       return false;
     }
     setValidatingError("");
@@ -45,7 +45,9 @@ export const PasswordStep = ({ setStep }: EmailStepProps) => {
     }
     if (value !== confirmPassword) {
       setMatchingError("Passwords do not match.");
-    }else{setMatchingError("")}
+    } else {
+      setMatchingError("");
+    }
   };
 
   const handleConfirmPasswordChange = (
@@ -67,9 +69,9 @@ export const PasswordStep = ({ setStep }: EmailStepProps) => {
   const handleSubmit = () => {
     setStep("login");
   };
-  const handleTopLeftButton=()=>{
-    setStep("email")
-}
+  const handleTopLeftButton = () => {
+    setStep("email");
+  };
 
   useEffect(() => {
     if (validatingError !== "" || matchingError !== "") {
@@ -95,17 +97,24 @@ export const PasswordStep = ({ setStep }: EmailStepProps) => {
         <input
           id="password"
           type={isPasswordVisible ? "text" : "password"}
-          className="rounded-md w-full border h-[2.25rem] pl-3"
+          className={`rounded-md w-full border h-[2.25rem] pl-3 ${
+            validatingError
+              ? "border-[#ef4444] border-opacity-50"
+              : "border-gray-300"
+          }`}
           placeholder="Password"
           onChange={(e) => {
             handlePasswordChange(e);
           }}
           value={password}
-          // style={{ borderColor: errors ? "#e4e4e7" : "#ef4444" }}
         />
         <input
           id="checkpassword"
-          className="rounded-md w-full border h-[2.25rem] pl-3"
+          className={`rounded-md w-full border h-[2.25rem] pl-3 ${
+            matchingError
+              ? "border-[#ef4444] border-opacity-50"
+              : "border-gray-300"
+          }`}
           placeholder="Confirm"
           type={isPasswordVisible ? "text" : "password"}
           value={confirmPassword}
@@ -114,9 +123,9 @@ export const PasswordStep = ({ setStep }: EmailStepProps) => {
         />
         {validatingError && <p className="login-warning">{validatingError}</p>}
         {matchingError && <p className="login-warning">{matchingError}</p>}
-        <div>
-          <input onChange={togglePasswordVisibility} type="checkbox" /> Show
-          password
+        <div className="flex items-center">
+          <Checkbox onCheckedChange={togglePasswordVisibility} />
+          <span className="ml-2">Show password</span>
         </div>
         <div>
           <button
@@ -132,7 +141,7 @@ export const PasswordStep = ({ setStep }: EmailStepProps) => {
           </button>
         </div>
         <div className="inline-block">
-          Already have an account?{" "}
+          Already have an account?
           <span className="text-[#2563EB] cursor-pointer inline-block p-2">
             Log in
           </span>
