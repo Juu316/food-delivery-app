@@ -41,20 +41,20 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
   };
 
   const handleSubmit = async () => {
-    try{
-      const response = await axios.post("http://localhost:3000", {email});
-      console.log(response.data)
+    try {
+      const response = await axios.post("http://localhost:3000", { email });
+      console.log(response.data);
       setStep("password");
-
-    }catch(error){console.log("Error saving email:", error)}
-    
+    } catch (error) {
+      console.log("Error saving email:", error);
+    }
   };
   const handleClickBlue = () => {
     setStep("login");
   };
-  const handleTopLeftButton=()=>{
-    setStep("login")
-}
+  const handleTopLeftButton = () => {
+    setStep("login");
+  };
   return (
     <div className="w-[25vw] flex flex-col gap-6">
       <Button onClick={handleTopLeftButton} variant="outline" size="icon">
@@ -69,17 +69,20 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
       </div>
       <input
         type="email"
-        className={`rounded-md w-full border h-[2.25rem] pl-3 ${errors.email ? "border-[#ef4444] border-opacity-50" : "border-gray-300"}`}
+        className={`rounded-md w-full border h-[2.25rem] pl-3 ${
+          errors.email
+            ? "border-[#ef4444] border-opacity-50"
+            : "border-gray-300"
+        }`}
         placeholder="Enter your email address"
         onKeyDown={handleKeyDown}
         onChange={(e) => {
           setEmail(e.target.value);
         }}
-        />
+      />
       {errors.email && <p className="login-warning">{errors.email}</p>}
       <div>
         <button
-          // onChange={validateEmail()}
           id="submitButton"
           onClick={handleSubmit}
           className="w-full  bg-[#18181B] text-[#fafafa] rounded-md h-[2.25rem]"
@@ -92,7 +95,7 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
         </button>
       </div>
       <div className="inline-block">
-        Already have an account?{" "}
+        Already have an account?
         <span
           onClick={handleClickBlue}
           className="text-[#2563EB] cursor-pointer inline-block p-2">
