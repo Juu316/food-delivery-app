@@ -1,5 +1,5 @@
 "use client";
-import Sidebar from "./sidebar/page";
+import Sidebar from "./main/page";
 export default function Home() {
   return (
     <>

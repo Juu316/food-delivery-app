@@ -1,18 +1,17 @@
-import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
-//import axios from "axios";
-import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import { useState, useEffect, SetStateAction, Dispatch } from "react";
 type EmailStepProps = {
   setStep: Dispatch<SetStateAction<string>>;
 };
 type ErrorType = {
-  email: string;
-};
-export const LoginStep = ({ setStep }: EmailStepProps) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    email: string;
+  };
+export const ResetPasswordStep = ({ setStep }: EmailStepProps) => {
   const [errors, setErrors] = useState<ErrorType>({} as ErrorType);
-  const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [email, setEmail] = useState("");
+
   const validateEmail = () => {
     const errors = {} as ErrorType;
 
@@ -24,22 +23,22 @@ export const LoginStep = ({ setStep }: EmailStepProps) => {
     setErrors(errors);
     setIsEmailValid(Object.keys(errors).length === 0);
   };
-  const handleClickForgotPassword = () => {
-    setStep("resetPassword");
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const submitButton = document.getElementById(
+        "submitButton"
+      ) as HTMLButtonElement;
+      submitButton.click();
+    }
+  };
+  const handleSubmit = () => {
+    console.log("Node mailer hiih ym bishuu");
   };
   const handleClickBlue = () => {
     setStep("email");
   };
   const handleTopLeftButton = () => {
-    setStep("email");
-  };
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      document.getElementById("submitButton")?.click();
-    }
+    setStep("login");
   };
   useEffect(() => {
     validateEmail();
@@ -51,59 +50,40 @@ export const LoginStep = ({ setStep }: EmailStepProps) => {
           <ChevronRight />
         </Button>
         <div className="login-top">
-          Log in
+          Reset your password
           <br />
           <span className="login-mid">
-            Log in to enjoy your favorite dishes.
+          Enter your email to receive a password reset link.
           </span>
         </div>
-        <input className={`rounded-md w-full border h-[2.25rem] pl-3 ${
-          errors.email
-            ? "border-[#ef4444] border-opacity-50"
-            : "border-gray-300"
-        }`}
-          
+        <input
+          type="email"
+          className={`rounded-md w-full border h-[2.25rem] pl-3 ${
+            errors.email
+              ? "border-[#ef4444] border-opacity-50"
+              : "border-gray-300"
+          }`}
           placeholder="Enter your email address"
+          onKeyDown={handleKeyDown}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-          onKeyDown={handleKeyDown}
         />
         {errors.email && <p className="login-warning">{errors.email}</p>}
-        <input
-          className="rounded-md w-full border h-[2.25rem] pl-3"
-          placeholder="Password"
-          type={isPasswordVisible ? "text" : "password"}
-          onKeyDown={handleKeyDown}
-        />
-
-        <div className="flex justify-between">
-          <div>
-            <input onChange={togglePasswordVisibility} type="checkbox" /> Show
-            password
-          </div>
-
-          <span
-            onClick={handleClickForgotPassword}
-            className="underline hover:cursor-pointer">
-            Forgot password ?
-          </span>
-        </div>
-
         <div>
           <button
             id="submitButton"
+            onClick={handleSubmit}
             className="w-full  bg-[#18181B] text-[#fafafa] rounded-md h-[2.25rem]"
             disabled={!isEmailValid}
             style={{
               opacity: isEmailValid ? 1 : 0.2,
               cursor: isEmailValid ? "pointer" : "not-allowed",
-            }}
-          >
-            Let&apos;s go
+            }}>
+            Send link
           </button>
         </div>
-        <div className="inline-block text-muted-foreground">
+        <div className="inline-block">
           Don&apos;t have an account?
           <span
             onClick={handleClickBlue}

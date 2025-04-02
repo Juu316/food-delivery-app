@@ -4,6 +4,7 @@ import { useState } from "react";
 import { EmailStep } from "./_components/email-step";
 import { PasswordStep } from "./_components/password-step";
 import {LoginStep} from "./_components/login-step";
+import { ResetPasswordStep } from "./_components/reset-password-step";
 import Image from "next/image";
 
 export default function Create() {
@@ -16,6 +17,7 @@ export default function Create() {
           {step === "email" && <EmailStep setStep={setStep} />}
           {step === "password" && <PasswordStep setStep={setStep}/>}
           {step === "login" && <LoginStep setStep={setStep}/>}
+          {step === "resetPassword" && <ResetPasswordStep setStep={setStep}/>  }
         </div>
       </div>
 

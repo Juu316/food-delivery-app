@@ -8,6 +8,6 @@ export const createFood = async (req, res) => {
         await foodModel.create({ foodName, price, image, ingredients, category });
         res.json({ message: 'Success' })
     } catch (err) {
-        res.status(403).json({ message: "Error occured" });
+        res.status(403).json({ message: "Error occurred" });
     }
 }

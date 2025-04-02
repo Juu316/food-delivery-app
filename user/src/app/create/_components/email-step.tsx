@@ -15,7 +15,6 @@ export const EmailStep = ({ setStep }: EmailStepProps) => {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<ErrorType>({} as ErrorType);
   const [isEmailValid, setIsEmailValid] = useState(false);
-
   useEffect(() => {
     validateEmail();
   }, [email]);
