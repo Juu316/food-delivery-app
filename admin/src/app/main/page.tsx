@@ -3,7 +3,7 @@ import { LayoutDashboard, Truck, Settings } from "lucide-react";
 import { useState } from "react";
 import FoodMenu from "./_components/food-menu";
 
-export default function Sidebar() {
+export default function Main() {
 
   const [selectedButton, setSelectedButton] = useState("foodMenu");
 
